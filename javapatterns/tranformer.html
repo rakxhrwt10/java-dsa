@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Summarizer</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: #e2e8f0;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 60px auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #38bdf8;
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 0;
+            color: #94a3b8;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            color: #cbd5f5;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            resize: none;
+            font-size: 15px;
+            background: #020617;
+            color: #e2e8f0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        textarea::placeholder {
+            color: #64748b;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.9);
+        }
+
+        #summary-output {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #summary-heading {
+            margin: 0;
+            color: #38bdf8;
+        }
+
+        #summary-text {
+            margin-top: 10px;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>🤖 AI Text Summarizer</h1>
+        <h3>Powered by Transformers</h3>
+        <p>Paste your content and get instant smart summary 🚀</p>
+
+        <form id="summarization-form">
+            <textarea id="dialogue-input" placeholder="Enter your content here..."></textarea>
+            <button type="submit">✨ Summarize</button>
+        </form>
+
+        <div id="summary-output">
+            <h3 id="summary-heading">Summary</h3>
+            <p id="summary-text">Your result will appear here...</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("summarization-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const input = document.getElementById("dialogue-input");
+            const output = document.getElementById("summary-text");
+            const btn = e.target.querySelector("button");
+
+            const text = input.value.trim();
+            if (!text) return;
+
+            output.innerText = "⚡ Generating summary...";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch("/summarize/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ dialogue: text }),
+                });
+
+                const data = await res.json();
+                output.innerText = data.summary || "No summary returned.";
+            } catch (err) {
+                output.innerText = "❌ Error: " + err.message;
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

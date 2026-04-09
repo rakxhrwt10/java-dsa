@@ -21,7 +21,7 @@ public class Ppyramidstep {
 
                
 
-                System.out.print("+");
+                System.out.print("*");
                 
             }
             
