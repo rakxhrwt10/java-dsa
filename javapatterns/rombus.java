@@ -7,7 +7,7 @@ public class rombus {
     public static void main(String[] args) {
         
 
-        int n=5;
+        int n=10;
 
         for(int row=1;row<=n;row++){
 
