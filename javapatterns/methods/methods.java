@@ -1,7 +1,7 @@
 
 
 public class methods {
-    void printtable(){
+   static void printtable(){
         int ans;
 
         for(int i=1;i<=10;i++){
@@ -16,10 +16,16 @@ public class methods {
 
     public static void main(String[] args) {
        
-        methods obj=new methods();
+        // methods obj=new methods();
 
-        obj.printtable();
+        // obj.printtable();
+
+        printtable();
 
     }
     
 }
+
+
+
+
