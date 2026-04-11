@@ -1,35 +1,43 @@
-
 import java.util.Scanner;
+
 public class inputarr {
 
+    // factorial function
+    static int factorial(int num){
+        int fact = 1;
+
+        for(int i = 1; i <= num; i++){
+            fact = fact * i;
+        }
+
+        return fact;
+    }
 
     public static void main(String[] args) {
-        
 
-        int arr[]=new int[5];
-        int n=arr.length;
-        //input 
-        Scanner sc= new Scanner(System.in);
+        int arr[] = new int[5];
+        int n = arr.length;
 
-        for(int i=0;i<=n-1;i++){
+        Scanner sc = new Scanner(System.in);
 
-           System.out.println("enter a number");
-            arr[i]=sc.nextInt();
-        }
-         
-
-        int sum=0;
-
-        for(int val :arr){
-
-            System.out.println(val);
-
-
-            sum+=val;
+        // input
+        for(int i = 0; i < n; i++){
+            System.out.println("enter a number");
+            arr[i] = sc.nextInt();
         }
 
-        System.out.println(sum);
+        int sum = 0;
 
+        // factorial + print
+        for(int val : arr){
+            System.out.println("Number: " + val);
+
+            int fact = factorial(val);
+            System.out.println("Factorial: " + fact);
+
+            sum += val;
+        }
+
+        System.out.println("Sum = " + sum);
     }
-    
 }
